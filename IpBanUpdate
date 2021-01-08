@@ -19,7 +19,7 @@ case $(ipset -v | grep -o "v[4,6]") in
       lsmod | grep -q "ipt_set" || for module in ip_set ip_set_nethash ip_set_iphash ipt_set; do modprobe $module; done;;
   *) logger -t Firewall "$0: Unknown ipset version. Exiting." && exit 1;;
 esac
-startTS=$(date +%s); logger -t Firewall "$0: Adding ya-malware-block rules to firewall..." && [ -t 1 ] && echo "$0: Adding ya-malware-block rules to firewall..."
+startTS=$(date +%s); logger -t Firewall "$0: Adding ip blocking rules to firewall..." && [ -t 1 ] && echo "$0: Adding ip blocking rules to firewall..."
 [ ! -d $(dirname $URLList) ] && mkdir -p $(dirname $URLList)
 [ ! -s $URLList ] && echo "Updating $URLList"
 [ ! -s $URLList ] && curl -sk "${FileSourceBase}${FileDenyLists}" -o $URLList
