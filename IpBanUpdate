@@ -6,7 +6,7 @@
 URLList=/etc/FirewallHostsExternal.deny		# Change to an appropriate location if needed This file is mandatory. It has the list of URLs of files that has the blocking IP and CIDR soures
 AllowList=/etc/FirewallHosts.allow			# Change to an appropriate location if needed. This file is mandatory, append to this file your own AllowListed discrete IPs.
 DenyList=/etc/FirewallHosts.deny			# Change to an appropriate location if needed This file is optional. You may put your manual IPs and CIDR ranges to block.
-ExternalAllowList=/etc/FirewallHostExternal.allow	# Set to an empty file to disable, change to an appropriate location if needed. This file is optional.
+ExternalAllowList=/etc/FirewallHostsExternal.allow	# Set to an empty file to disable, change to an appropriate location if needed. This file is optional.
 FileSourceBase=https://raw.githubusercontent.com/ArchPhoenixTeam/IP-Block-List/main/
 FileDenyLists=FireHOL.lists 					# This variable is not an array, your array must be inside one file.
 FileSourceBaseAllowList=$FileSourceBase				# Set this variable to another base URL if required
