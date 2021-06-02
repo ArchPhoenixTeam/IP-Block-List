@@ -1,0 +1,62 @@
+#!/bin/bash
+# Contributors: 
+# Alexander Ryzhov - 2016 (Github user ryzhovau)
+# ArchPhoenix Team - 2021
+# .NOTES
+# Sets must already exist, script won't very if the list exist before adding and won't try to create it if missing.
+
+### Config ###
+LIST_DIR='/opt/var/GeoIPset'
+#LISTSP2P[0]="IP-Geo-CN=https://list.iblocklist.com/?list=cn&fileformat=p2p&archiveformat=gz"
+#LISTSP2P[1]="IP-Geo-RU=https://list.iblocklist.com/?list=ru&fileformat=p2p&archiveformat=gz"
+#LISTSP2P[2]="IP-Geo-FR=https://list.iblocklist.com/?list=fr&fileformat=p2p&archiveformat=gz"
+#LISTSP2P[3]="IP-Geo-US=https://list.iblocklist.com/?list=us&fileformat=p2p&archiveformat=gz"
+LISTSP2P[4]="IP-Service-TorNodes=https://list.iblocklist.com/?list=togdoptykrlolpddwbvz&fileformat=p2p&archiveformat=gz"
+LISTSP2P[5]="IP-Corp-Microsoft=https://list.iblocklist.com/?list=xshktygkujudfnjfioro&fileformat=p2p&archiveformat=gz"
+LISTCIDR[0]="IP-Geo-CN=http://ipverse.net/ipblocks/data/countries/cn.zone"
+LISTCIDR[1]="IP-Geo-RU=http://ipverse.net/ipblocks/data/countries/ru.zone"
+LISTCIDR[2]="IP-Geo-FR=http://ipverse.net/ipblocks/data/countries/fr.zone"
+LISTCIDR[3]="IP-Geo-US=http://ipverse.net/ipblocks/data/countries/us.zone"
+LISTCIDR6[0]="IP6-Geo-CN=http://ipverse.net/ipblocks/data/countries/cn-ipv6.zone"
+LISTCIDR6[1]="IP6-Geo-RU=http://ipverse.net/ipblocks/data/countries/ru-ipv6.zone"
+LISTCIDR6[2]="IP6-Geo-FR=http://ipverse.net/ipblocks/data/countries/fr-ipv6.zone"
+LISTCIDR6[3]="IP6-Geo-US=http://ipverse.net/ipblocks/data/countries/us-ipv6.zone"
+
+### Execution ###
+[ -d "$LIST_DIR/IPv4" ] || mkdir -p $LIST_DIR/IPv4
+[ -d "$LIST_DIR/IPv6" ] || mkdir -p $LIST_DIR/IPv6
+logger -t $(basename $0) 'started P2P format list'
+
+for item in ${LISTSP2P[*]} ; do
+    name="$(echo ${item} | cut -d '=' -f 1)"
+    url="${item#$name=}"
+    echo "Processing $name list..."
+    [ -f "$LIST_DIR/IPv4/$name.gz" ] || wget -O "$LIST_DIR/IPv4/$name.gz" "$url"
+    for net in $(zcat $LIST_DIR/IPv4/$name.gz | cut -d ':' -f 2 | grep -E '^[-0-9.]+$') ; do
+        ipset add $name $net
+    done
+done
+
+logger -t $(basename $0) 'started CIDR format list'
+
+for item in ${LISTSCIDR[*]} ; do
+    name="$(echo ${item} | cut -d '=' -f 1)"
+    url="${item#$name=}"
+    echo "Processing $name list..."
+    [ -f "$LIST_DIR/IPv4/$name.txt" ] || wget -O "$LIST_DIR/IPv4/$name.txt" "$url"
+    for net in $(cat $LIST_DIR/IPv4/$name.txt | grep -E '^[-0-9.]') ; do
+        ipset add $name $net
+    done
+done
+
+logger -t $(basename $0) 'started CIDR6 format list'
+
+for item in ${LISTSCIDR[*]} ; do
+    name="$(echo ${item} | cut -d '=' -f 1)"
+    url="${item#$name=}"
+    echo "Processing $name list..."
+    [ -f "$LIST_DIR/IPv6/$name.txt" ] || wget -O "$LIST_DIR/IPv6/$name.txt" "$url"
+    for net in $(cat $LIST_DIR/IPv6/$name.txt | grep -E '^[-0-9.]') ; do
+        ipset add ${name} $net
+    done
+done
