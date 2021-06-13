@@ -3,12 +3,12 @@
 # redhat27 - 2017 (Github user shounak-de)
 # ArchPhoenix Team 2020-2021
 
-URLList=/etc/FirewallHostsExternal.deny		# Change to an appropriate location if needed This file is mandatory. It has the list of URLs of files that has the blocking IP and CIDR soures
-AllowList=/etc/FirewallHosts.allow			# Change to an appropriate location if needed. This file is mandatory, append to this file your own AllowListed discrete IPs.
-DenyList=/etc/FirewallHosts.deny			# Change to an appropriate location if needed This file is optional. You may put your manual IPs and CIDR ranges to block.
-ExternalAllowList=/etc/FirewallHostsExternal.allow	# Set to an empty file to disable, change to an appropriate location if needed. This file is optional.
+URLList=/etc/IpBan/FirewallHostsExternal.deny		# Change to an appropriate location if needed This file is mandatory. It has the list of URLs of files that has the blocking IP and CIDR soures
+AllowList=/etc/IpBan/FirewallHosts.allow			# Change to an appropriate location if needed. This file is mandatory, append to this file your own AllowListed discrete IPs.
+DenyList=/etc/IpBan/FirewallHosts.deny			# Change to an appropriate location if needed This file is optional. You may put your manual IPs and CIDR ranges to block.
+ExternalAllowList=/etc/IpBan/FirewallHostsExternal.allow	# Set to an empty file to disable, change to an appropriate location if needed. This file is optional.
 FileSourceBase=https://raw.githubusercontent.com/ArchPhoenixTeam/IP-Block-List/main/
-FileDenyLists=FireHOL.lists 					# This variable is not an array, your array must be inside one file.
+FileDenyLists=Deny.lists 					# This variable is not an array, your array must be inside one file.
 FileSourceBaseAllowList=$FileSourceBase				# Set this variable to another base URL if required
 FileExternalAllowList=DefaultAllow.list				# This variable is an array of IP regex to allow list by default, obtained from a remote source
 
