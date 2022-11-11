@@ -24,3 +24,5 @@ https://raw.githubusercontent.com/firehol/blocklist-ipsets/master/uscert_hidden_
 https://raw.githubusercontent.com/firehol/blocklist-ipsets/master/vxvault.ipset
 https://raw.githubusercontent.com/ArchPhoenixTeam/IP-Block-List/main/Abuse.ipset
 https://raw.githubusercontent.com/ArchPhoenixTeam/IP-Block-List/main/Abuse6.ipset
+https://raw.githubusercontent.com/firehol/blocklist-ipsets/master/socks_proxy_30d.ipset
+https://raw.githubusercontent.com/firehol/blocklist-ipsets/master/botscout_30d.ipset
