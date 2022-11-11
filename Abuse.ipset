@@ -9,4 +9,5 @@
 89.248.174.0/24
 93.174.88.0/21
 94.102.48.0/20
-120.48.0.0/15 # High volume spam, phishing, americanexpress brand impersonation, no reply from abuse
+# High volume spam, phishing, americanexpress brand impersonation, no reply from abuse
+120.48.0.0/15 
