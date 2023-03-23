@@ -11,6 +11,6 @@
 94.102.48.0/20
 # High volume spam, phishing, americanexpress brand impersonation, no reply from abuse
 120.48.0.0/15 
-# Charter.net AKA Spectrum, SSH brute-forcing, waiting for abuse@ to reply to set expiry time
+# Charter.net AKA Spectrum, SSH brute-forcing, abuse@ claims they do not own this IP addres while arin whois claims they are in charge, no expiry time planned
 47.32.0.0/12
 47.48.0.0/14
